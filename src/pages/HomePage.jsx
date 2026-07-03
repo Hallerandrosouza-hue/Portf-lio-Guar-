@@ -12,7 +12,10 @@ import PortfolioCard from '@/components/PortfolioCard.jsx';
 import GradientButton from '@/components/GradientButton.jsx';
 import DifferentialCard from '@/components/DifferentialCard.jsx';
 
+import { useNavigate } from 'react-router-dom';
+
 function HomePage() {
+  const navigate = useNavigate();
   const services = [
     {
       icon: Code,
@@ -217,10 +220,10 @@ function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-              <GradientButton variant="primary">
+              <GradientButton variant="primary" onClick={() => navigate('/contato')}>
                 Começar agora
               </GradientButton>
-              <GradientButton variant="outline">
+              <GradientButton variant="outline" onClick={() => navigate('/portfolio')}>
                 Ver portfólio
               </GradientButton>
             </div>
