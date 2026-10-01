@@ -127,26 +127,49 @@ function PortfolioCard({ image, title, description, tags, index }) {
 /* ── Feature icon row ── */
 function FeatureTileRow({ features }) {
   return (
-    <div className="flex items-center justify-center flex-wrap gap-0">
+    <div className="flex items-center justify-center flex-wrap" style={{ gap: 0, paddingBottom: 16 }}>
       {features.map((f, i) => (
         <React.Fragment key={f.label}>
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
             className="flex flex-col items-center"
-            style={{ gap: 12 }}
+            style={{ gap: 14, padding: '0 20px' }}
           >
-            <div className="icon-tile">
-              <f.icon style={{ width: 22, height: 22, color: 'var(--color-frost-glow)', strokeWidth: 1.5 }} />
+            {/* Icon tile — flutuante com glow laranja */}
+            <div
+              className="icon-tile icon-tile-float"
+              style={{
+                width: 64,
+                height: 64,
+                animationDelay: `${i * 0.4}s`,
+              }}
+            >
+              <f.icon style={{ width: 24, height: 24, color: 'var(--color-frost-glow)', strokeWidth: 1.5 }} />
             </div>
-            <span style={{ fontSize: 13, color: 'var(--color-fog-veil)', fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>
+            <span style={{
+              fontSize: 13,
+              color: 'var(--color-fog-veil)',
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 500,
+              textAlign: 'center',
+              maxWidth: 100,
+              lineHeight: 1.4,
+            }}>
               {f.label}
             </span>
           </motion.div>
           {i < features.length - 1 && (
-            <div style={{ width: 32, height: 1, background: 'rgba(186,215,247,0.10)', flexShrink: 0, margin: '0 8px', marginBottom: 28 }} />
+            <div style={{
+              width: 28,
+              height: 1,
+              background: 'linear-gradient(90deg, rgba(255,130,0,0.15), rgba(186,215,247,0.10), rgba(255,130,0,0.15))',
+              flexShrink: 0,
+              marginBottom: 28,
+              alignSelf: 'center',
+            }} />
           )}
         </React.Fragment>
       ))}
