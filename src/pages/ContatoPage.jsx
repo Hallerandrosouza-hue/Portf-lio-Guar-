@@ -1,130 +1,248 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Building2, Hash, MessageSquare, ArrowRight } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import ContactForm from '@/components/ContactForm.jsx';
 
-function ContatoPage() {
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email',
-      content: 'guara.six.6@gmail.com',
-      link: 'mailto:guara.six.6@gmail.com'
-    },
-    {
-      icon: Phone,
-      title: 'Telefone',
-      content: '86 98132-5380 / 89 98137-5559',
-      link: 'tel:+5586981325380'
-    },
-    {
-      icon: MapPin,
-      title: 'Endereço',
-      content: 'R. José Ulisses Leal, 281 - Alegria, Teresina - PI, 64037-460',
-      link: null
-    },
-    {
-      icon: Clock,
-      title: 'Horário',
-      content: 'Segunda a Sexta: 9h às 18h',
-      link: null
-    }
-  ];
+/* ── dados da empresa ── */
+const EMPRESA = {
+  razaoSocial: '69.398.971 HALLERANDRO SOUZA SANTANA',
+  cnpj: '69.398.971/0001-38',
+  cidade: 'Teresina - PI',
+  endereco: 'R. José Ulisses Leal, 281 - Alegria, Teresina - PI, 64037-460',
+  telefone: '(86) 8166-4289',
+  whatsapp: '5586981325380',
+  email: 'guara.six.6@gmail.com',
+  horario: 'Segunda a Sexta: 9h às 18h',
+};
 
+const contactCards = [
+  {
+    icon: Building2,
+    title: 'Razão Social',
+    content: EMPRESA.razaoSocial,
+    link: null,
+  },
+  {
+    icon: Hash,
+    title: 'CNPJ',
+    content: EMPRESA.cnpj,
+    link: null,
+  },
+  {
+    icon: Phone,
+    title: 'Telefone',
+    content: EMPRESA.telefone,
+    link: `tel:+55${EMPRESA.telefone.replace(/\D/g, '')}`,
+  },
+  {
+    icon: MessageSquare,
+    title: 'WhatsApp',
+    content: EMPRESA.telefone,
+    link: `https://wa.me/${EMPRESA.whatsapp}`,
+  },
+  {
+    icon: Mail,
+    title: 'E-mail',
+    content: EMPRESA.email,
+    link: `mailto:${EMPRESA.email}`,
+  },
+  {
+    icon: MapPin,
+    title: 'Endereço',
+    content: EMPRESA.endereco,
+    link: `https://maps.google.com/?q=${encodeURIComponent(EMPRESA.endereco)}`,
+  },
+  {
+    icon: Clock,
+    title: 'Horário de Atendimento',
+    content: EMPRESA.horario,
+    link: null,
+  },
+];
+
+function SectionLabel({ children }) {
+  return (
+    <div className="flex items-center gap-3 mb-4">
+      <span className="inline-block" style={{ width: 48, height: 2, background: '#FF6600' }} />
+      <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#FF6600' }}>
+        {children}
+      </span>
+    </div>
+  );
+}
+
+function ContatoPage() {
   return (
     <>
       <Helmet>
-        <title>Contato - GUARA SIX | Entre em Contato Conosco</title>
-        <meta name="description" content="Entre em contato com a GUARA SIX. Estamos prontos para transformar seu negócio com soluções tecnológicas inovadoras." />
+        <title>Contato — GUARÁ SIX</title>
+        <meta
+          name="description"
+          content="Entre em contato com a GUARÁ SIX. CNPJ: 69.398.971/0001-38 | Teresina - PI | (86) 8166-4289"
+        />
       </Helmet>
 
       <Header />
 
-      <main className="pt-20">
-        <section className="py-20 md:py-24 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="bg-[#080808] min-h-screen pt-24">
+
+        {/* ── Hero banner ── */}
+        <section className="py-16 md:py-20 border-b border-white/5">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
             >
-              <h1 className="text-foreground mb-6">Entre em contato</h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Estamos prontos para transformar seu negócio com soluções tecnológicas inovadoras
+              <SectionLabel>Fale Conosco</SectionLabel>
+              <h1 className="text-white mb-4">
+                ENTRE EM<br />
+                <span style={{ color: '#FF6600' }}>CONTATO.</span>
+              </h1>
+              <p className="text-white/50 text-lg max-w-xl leading-relaxed">
+                Estamos prontos para transformar seu negócio com soluções tecnológicas de alto nível.
               </p>
             </motion.div>
+          </div>
+        </section>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
+        {/* ── Dados legais + Formulário ── */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+              {/* ── Coluna esquerda: dados da empresa ── */}
               <div>
-                <ContactForm />
-              </div>
-
-              {/* Contact Information */}
-              <div className="space-y-8">
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-10"
                 >
-                  <h2 className="text-2xl font-semibold mb-6 text-foreground">Informações de contato</h2>
-                  <div className="space-y-4">
-                    {contactInfo.map((info, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                        className="glass-effect rounded-xl p-6 hover:glow-effect transition-all duration-300"
-                      >
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
-                            <info.icon className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold mb-1 text-foreground">{info.title}</h3>
-                            {info.link ? (
-                              <a
-                                href={info.link}
-                                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-                              >
-                                {info.content}
-                              </a>
-                            ) : (
-                              <p className="text-muted-foreground">{info.content}</p>
-                            )}
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
+                  <h2 className="text-white text-2xl font-bold mb-1" style={{ fontFamily: 'Barlow Condensed, sans-serif' }}>
+                    INFORMAÇÕES DA EMPRESA
+                  </h2>
+                  <p className="text-white/40 text-sm">Dados oficiais e canais de atendimento</p>
+                </motion.div>
+
+                {/* Card de dados legais destaque */}
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="mb-6 p-6 border border-orange-500/20 bg-orange-500/5 rounded-sm"
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <Building2 className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Razão Social</p>
+                      <p className="text-white font-semibold text-sm">{EMPRESA.razaoSocial}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Hash className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-white/40 text-xs uppercase tracking-widest mb-1">CNPJ</p>
+                      <p className="text-white font-semibold text-sm tracking-wider">{EMPRESA.cnpj}</p>
+                    </div>
                   </div>
                 </motion.div>
 
-                {/* Map */}
+                {/* Demais informações */}
+                <div className="space-y-3">
+                  {contactCards.filter(c => !['Razão Social', 'CNPJ'].includes(c.title)).map((info, i) => (
+                    <motion.div
+                      key={info.title}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.15 + i * 0.07 }}
+                      className="flex items-start gap-4 p-4 border border-white/6 bg-white/[0.02] rounded-sm hover:border-orange-500/20 transition-colors group"
+                    >
+                      <div className="w-9 h-9 flex-shrink-0 rounded-sm bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
+                        <info.icon className="w-4 h-4 text-orange-500" />
+                      </div>
+                      <div>
+                        <p className="text-white/35 text-xs uppercase tracking-widest mb-0.5">{info.title}</p>
+                        {info.link ? (
+                          <a
+                            href={info.link}
+                            target={info.link.startsWith('http') ? '_blank' : undefined}
+                            rel="noopener noreferrer"
+                            className="text-white text-sm hover:text-orange-400 transition-colors"
+                          >
+                            {info.content}
+                          </a>
+                        ) : (
+                          <p className="text-white text-sm">{info.content}</p>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* WhatsApp CTA */}
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                  className="glass-effect rounded-2xl overflow-hidden h-64 flex items-center justify-center p-0 border border-white/5 relative"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7 }}
+                  className="mt-8"
                 >
-                  <iframe
-                    title="Mapa de localização"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    style={{ border: 0, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-                    src="https://maps.google.com/maps?q=R.%20Jos%C3%A9%20Ulisses%20Leal,%20281%20-%20Alegria,%20Teresina%20-%20PI&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                    allowFullScreen
-                  />
+                  <a
+                    href={`https://wa.me/${EMPRESA.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white rounded-sm"
+                    style={{ background: '#FF6600' }}
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    Falar pelo WhatsApp
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
                 </motion.div>
               </div>
+
+              {/* ── Coluna direita: formulário ── */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+              >
+                <h2 className="text-white text-2xl font-bold mb-1" style={{ fontFamily: 'Barlow Condensed, sans-serif' }}>
+                  ENVIE UMA MENSAGEM
+                </h2>
+                <p className="text-white/40 text-sm mb-8">Responderemos em até 24 horas úteis</p>
+                <ContactForm />
+              </motion.div>
             </div>
           </div>
         </section>
+
+        {/* ── Mapa ── */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-sm overflow-hidden border border-white/6"
+              style={{ height: 300 }}
+            >
+              <iframe
+                title="Localização GUARÁ SIX"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0, filter: 'grayscale(80%) invert(90%)' }}
+                src="https://maps.google.com/maps?q=R.%20Jos%C3%A9%20Ulisses%20Leal,%20281%20-%20Alegria,%20Teresina%20-%20PI&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                allowFullScreen
+              />
+            </motion.div>
+          </div>
+        </section>
+
       </main>
 
       <Footer />

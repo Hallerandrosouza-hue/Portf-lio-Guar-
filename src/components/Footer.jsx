@@ -105,13 +105,20 @@ function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-14 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/25 text-xs">
-            © {new Date().getFullYear()} GUARÁ SIX. Todos os direitos reservados.
-          </p>
-          <div className="flex gap-6">
-            <Link to="#" className="text-xs text-white/25 hover:text-white/50 transition-colors">Política de Privacidade</Link>
-            <Link to="#" className="text-xs text-white/25 hover:text-white/50 transition-colors">Termos de Serviço</Link>
+        <div className="mt-14 pt-8 border-t border-white/5 space-y-3">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-white/30 text-xs font-medium">
+                © 2026 · 69.398.971 HALLERANDRO SOUZA SANTANA
+              </p>
+              <p className="text-white/20 text-xs">
+                CNPJ: 69.398.971/0001-38
+              </p>
+            </div>
+            <div className="flex gap-6">
+              <Link to="#" className="text-xs text-white/25 hover:text-white/50 transition-colors">Política de Privacidade</Link>
+              <Link to="#" className="text-xs text-white/25 hover:text-white/50 transition-colors">Termos de Serviço</Link>
+            </div>
           </div>
         </div>
       </div>
